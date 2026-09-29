@@ -98,9 +98,9 @@ console.log(gameObjects)
 
 for (let i of gameObjects){
   console.log(i.name)
-  for (let j of i){
-    foundobject = j
-  }
+  // for (let j of i){
+  //   foundobject = j
+  // }
 }
 
 console.log(foundobject)

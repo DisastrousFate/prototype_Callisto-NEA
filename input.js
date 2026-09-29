@@ -2,32 +2,31 @@ import { NoToneMapping } from 'three';
 import {gameObjects} from './main.js'
 
 
-function findMesh(name){
-    (async() => {
-        console.log("waiting for variable");
-        let found = false;
-        let object;
-
-        do {
-            for (let i of gameObjects){
-            
-                if(i.name == name){
-                    found = true;
-                    object = gameObjects[i]
-                }
-            }
-          
-          
-        } while (found == false)
-        
-        console.log(object);
-    // await new Promise(resolve => setTimeout(resolve, 1000));
-
-    })();
+function findMesh(meshName) {
+    const found = gameObjects.find(object => object.name === meshName);
+    return found;
 }
 
-function movePlayer(){
+function movePlayer(key){
+    let moveObject = findMesh('moveObject')
+    if (moveObject) {
+        // object exists, begin command execution...
 
+        if(key == 'w'){
+            moveObject.position.z -= 0.1;
+        }
+        if(key == 's'){
+            moveObject.position.z += 0.1;
+        }
+        if(key == 'a'){
+            moveObject.position.x -= 0.1;
+        }
+        if(key == 'd'){
+            moveObject.position.x += 0.1;
+        }
+        
+
+    }
 }
 
 
@@ -44,20 +43,23 @@ export class Input{
         });
 
         canvas.addEventListener('keydown', (key) => {
-            
+            console.log(key.key)
             switch (key.key){
                 case 'w':
-                    //movePlayer(key.key);
-                    findMesh('moveObject')
+                    movePlayer(key.key);
+                    
                     break;
                 case 'a':
-                    
+                    movePlayer(key.key);
+
                     break;
                 case 's':
-                    
+                    movePlayer(key.key);
+
                     break;
                 case 'd':
-                    
+                    movePlayer(key.key);
+
                     break;
             }
             
